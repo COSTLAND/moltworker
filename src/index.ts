@@ -156,12 +156,19 @@ async function ensureClawdbotGateway(
   // Wait for the gateway to be ready
   try {
     console.log('Waiting for Clawdbot gateway to be ready on port', CLAWDBOT_PORT);
+    console.log('Environment vars being passed:', Object.keys(envVars));
+    
     // Use TCP mode - Clawdbot gateway uses WebSocket, not HTTP health endpoint
     await process.waitForPort(CLAWDBOT_PORT, {
       mode: 'tcp',
       timeout: STARTUP_TIMEOUT_MS,
     });
     console.log('Clawdbot gateway is ready!');
+    
+    // Log process output for debugging
+    const logs = await process.getLogs();
+    if (logs.stdout) console.log('Clawdbot stdout:', logs.stdout);
+    if (logs.stderr) console.log('Clawdbot stderr:', logs.stderr);
   } catch (e) {
     const logs = await process.getLogs();
     console.error('Clawdbot startup failed. Stderr:', logs.stderr);

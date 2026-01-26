@@ -1,0 +1,7 @@
+# Copy this to .dev.vars and fill in your values
+# .dev.vars is gitignored and used by wrangler dev
+
+ANTHROPIC_API_KEY=sk-ant-...
+# CLAWDBOT_GATEWAY_TOKEN=optional-token
+# TELEGRAM_BOT_TOKEN=optional
+# DISCORD_BOT_TOKEN=optional
